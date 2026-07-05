@@ -11,8 +11,8 @@ app = FastAPI(
     description=settings.DESCRIPTION,
     servers=[
         {
-            "url": "http://127.0.0.1:8000",
-            "description": "Local Development Server"
+            "url": "https://cropgrower-tools.onrender.com",
+            "description": "Production Server"
         }
     ]
 )
