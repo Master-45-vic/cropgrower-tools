@@ -29,6 +29,11 @@ def get_weather_description(code: int) -> str:
     return weather_codes.get(code, "Unknown")
 
 def generate_recommendation(weather_code: int, rain_prob: int) -> str:
+    if weather_code is None:
+        weather_code = -1
+    if rain_prob is None:
+        rain_prob = 0
+        
     if rain_prob > 60 or weather_code in [61, 63, 65, 80, 81, 82, 95, 96, 99]:
         return "Rain expected today. Delay irrigation."
     elif weather_code in [0, 1, 2]:
@@ -74,7 +79,10 @@ def get_weather(city: str):
         weather_code = current["weather_code"]
         
         # Get today's max rain probability
-        rain_prob = daily["precipitation_probability_max"][0] if "precipitation_probability_max" in daily and len(daily["precipitation_probability_max"]) > 0 else 0
+        rain_prob_list = daily.get("precipitation_probability_max")
+        rain_prob = 0
+        if rain_prob_list and len(rain_prob_list) > 0 and rain_prob_list[0] is not None:
+            rain_prob = int(rain_prob_list[0])
 
         weather_desc = get_weather_description(weather_code)
         recommendation = generate_recommendation(weather_code, rain_prob)
