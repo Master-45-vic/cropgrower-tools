@@ -61,9 +61,9 @@ def get_market_price(crop: str = Query(..., description="Name of the crop/commod
                     district=row.get("district", "Unknown"),
                     market=row.get("market", "Unknown"),
                     commodity=row.get("commodity", "Unknown"),
-                    min_price=f"INR {row.get('min_price', 'N/A')}",
-                    max_price=f"INR {row.get('max_price', 'N/A')}",
-                    modal_price=f"INR {row.get('modal_price', 'N/A')}",
+                    min_price=f"INR {row.get('min_price', 'N/A')} per Quintal",
+                    max_price=f"INR {row.get('max_price', 'N/A')} per Quintal",
+                    modal_price=f"INR {row.get('modal_price', 'N/A')} per Quintal",
                     arrival_date=row.get("arrival_date", "Unknown")
                 )
             )
